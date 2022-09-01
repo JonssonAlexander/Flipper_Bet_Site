@@ -1,0 +1,32 @@
+<section class="wrapper">
+  <!-- Row title -->
+  <main class="row title">
+    <ul>
+      <li>Bettare</li>
+      <li>Insättning</li>
+      <li>Odds</li>
+      <li>Tillgänglig</li>
+    </ul>
+  </main>
+  <!-- Information row -->
+  {%for i in range(10)%}
+      <article class="row {{classes[i]}}">
+        <ul>
+          <li>{{players[i][0]}} vs {{players[i][1]}}</a></li>
+          <li>{{insättning[i]}}</li>
+          <li>{{odds[i]}}</li>
+          <li>{{played[i]}}</li>
+          {% if played[i] %}
+            <li>  <button href="take_bet/{{ids[i]}}" type="submit" class="button">Take bet!</button></li>
+
+          {% endif %}
+
+        </ul>
+        <ul class="more-content">
+          <li>Kom då!!!</li>
+        </ul>
+      </article>
+    </form>
+  {% endfor %}
+</section>
+

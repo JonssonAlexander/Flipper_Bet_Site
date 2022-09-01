@@ -1,0 +1,27 @@
+<section class="wrapper">
+    <!-- Row title -->
+    <main class="row title">
+      <ul>
+        <li>Players</li>
+        <li>Time</li>
+        <li></span>Resultat</li>
+        <li>Odds</li>
+        <li>Lagda bett</li>
+      </ul>
+    </main>
+    <!-- Information row -->
+    {%for i in range(nr_of_games)%}
+      <article class="row nfl">
+        <ul>
+          <li><a href="{{ids[i]}}">{{players[i]}}</a></li>
+          <li>{{times[i]}}</li>
+          <li>{{results[i][0]}} - {{results[i][1]}}</li>
+          <li>1.88</li>
+          <li>8</li>
+        </ul>
+        <ul class="more-content">
+          <li>{{comments[i]}}</li>
+        </ul>
+      </article>
+    {% endfor %}
+  </section>
