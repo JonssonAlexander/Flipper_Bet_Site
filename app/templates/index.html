@@ -11,6 +11,14 @@
 
  <body>
   <title>Flipper Betting</title>
+  {% if current_user.is_anonymous %}
+  <li><a href="{{ url_for('login') }}" class="button-27">Login</a></li>
+  <li><a href="{{ url_for('register') }}" class= "button-27">Click to Register!</a></li>
+  {% else %}
+  <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+  <li><a href="{{ url_for('logout') }}" class= "button-27">Logout</a></li>
+  {% endif %}
+</body>
   <h1 style="color: white; font-size: 100; text-align: center;">Matcher</h1>
   <form method="post">
 
@@ -20,13 +28,7 @@
   <button type="submit" class="button-27">Submit</button>
   </form>
   <div id='chart' class='chart'”></div>
-  {% if current_user.is_anonymous %}
-  <li><a href="{{ url_for('login') }}">Login</a></li>
-  {% else %}
-  <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
-  <li><a href="{{ url_for('logout') }}">Logout</a></li>
-  {% endif %}
-</body>
+  
 
 
 

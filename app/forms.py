@@ -6,8 +6,9 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username=StringField('Username', validators=[DataRequired()]) #Vad betyder [DataRequired]?
+    username=StringField('Username', validators=[DataRequired()]) 
     password=PasswordField('Password', validators=[DataRequired()])
+    max_score=StringField('Vad är ditt maxscore?', validators=[DataRequired()])
     remember_me=BooleanField('Remember me')
     submit=SubmitField('Sign in')
 

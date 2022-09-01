@@ -11,7 +11,10 @@ class User(UserMixin, db.Model):
     username= db.Column(db.String(64), index=True, unique=True)
     email= db.Column(db.String(120), index=True, unique=True)
     password_hash= db.Column(db.String(128))
-    post= db.relationship('Post', backref='author', lazy= 'dynamic')
+    about_me= db.Column(db.String(180))
+    maxscore=db.Column(db.String(180)) #OBS! Gjorde den som en string och inte som en integer, kan bli bökigt sen när vi inför elo
+    wins= db.Column(db.Integer,index=True)
+    losses=db.Column(db.Integer,index=True)
     
     def __repr__(self):
         return '<User {}>'.format(self.username)

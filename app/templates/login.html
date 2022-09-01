@@ -5,11 +5,17 @@
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}
         </p>
+       
         <p>
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
         </p>
+        <p>
+            {{ form.max_score.label }}<br>
+            {{ form.max_score(size=32) }}
+        </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
+        
         <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
     </form>
