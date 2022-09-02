@@ -1,0 +1,25 @@
+
+<h1>Skapa Spel</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.player1.label }}<br>
+            {{ form.player1(size=32) }}
+        </p>
+       
+        <p>
+            {{ form.player2.label }}<br>
+            {{ form.player2(size=32) }}
+        </p>
+        <p>
+            {{ form.bets.label }}<br>
+            {{ form.bets(size=32) }}
+        </p>
+        <p>
+            {{ form.odds.label }}<br>
+            {{ form.odds(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+        
+        <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+    </form>

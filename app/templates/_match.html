@@ -1,0 +1,12 @@
+<article class="row nfl">
+  <ul>
+    <li>{{game.player1}} vs {{game.player2}}</a></li>
+    <li>{{game.bets}} x 🍻</li>
+    <li>{{game.odds}}</li>
+    {%if game.played%}
+   
+    {%else%}
+    <li>  <button href="{{ url_for('confirm_match') }}" type="submit" class="button">Take bet!</button></li>
+    {% endif %}  
+  </ul>
+</article>

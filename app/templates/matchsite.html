@@ -1,0 +1,15 @@
+<section class="wrapper">
+    <!-- Row title -->
+    <main class="row title">
+      <ul>
+        <li>Bettare</li>
+        <li>Insättning</li>
+        <li>Odds</li>
+        <li>Tillgänglig</li>
+      </ul>
+    </main>
+    {% for game in games %}
+      {% include '_match.html' %}
+    {% endfor %}
+   
+</section>  

@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 from app import app 
 from app.forms import LoginForm 
 from app.forms import RegistrationForm
+from app.forms import MatchForm
 from flask_login import current_user, login_user
 from app.models import User
+from app.models import Game
 from flask_login import logout_user
 from flask_login import login_required
 from werkzeug.urls import url_parse
@@ -36,12 +38,16 @@ bets = {
 
 @app.route('/', methods=('GET', 'POST'))
 def index():
-    return render_template('index.html', players=Games['players'], times=Games['times'], results=Games['results'], comments=Games["comments"], ids=Games["ids"], nr_of_games=len(Games['players']))
+    classes = ["mlb" if x else 'pga' for x in bets['played']]
+    games=Game.query.all()
+    return render_template('index.html', games=games, classes=classes, players=Games['players'], times=Games['times'], results=Games['results'], comments=Games["comments"], ids=Games["ids"], nr_of_games=len(Games['players']))
 
 @app.route('/bettingpage', methods=('GET', 'POST'))
 
 def betting():
-    return render_template('index.html', players=Games['players'], times=Games['times'], results=Games['results'], comments=Games["comments"], nr_of_games=len(Games['players']))
+    games=Game.query.all()
+    
+    return render_template('index.html', games=games, players=Games['players'], times=Games['times'], results=Games['results'], comments=Games["comments"], nr_of_games=len(Games['players']))
 
 @app.route('/login', methods= ['GET', 'POST'])
 def login():
@@ -82,8 +88,36 @@ def register():
 
 
 @app.route('/<match_id>', methods=('GET', 'POST'))
-def match(match_id):
+def matchestype(match_id):
 
     classes = ["mlb" if x else 'pga' for x in bets['played']]
 
     return render_template('bets.html', ids=["ids"], insättning=bets["insättning"], classes=classes, players=bets['players'], odds=bets['odds'], played=bets['played'], nr_of_bets=len(bets['players']), positions=bets['positions'])
+
+@app.route('/match', methods= ['GET', 'POST'])
+@login_required
+def match():
+    form=MatchForm()
+    if form.validate_on_submit():
+        game = Game(player1=form.player1.data, player2=form.player2.data, odds=form.odds.data, bets=form.bets.data, available=form.available.data )
+        db.session.add(game)
+        db.session.commit()
+        flash('Your match-request is now public')
+        return redirect(url_for('index'))
+    return render_template('post_match.html', title='Match', form=form)
+   
+    #skicka till en annan sida, där säger den "är du säker?" Om du skriver ja uppdateras game.played till true och du skickas till 
+    #ytterligare en sida där du ska skriva in vem som vann för att uppdatera game.losses/game.wins
+
+#@app.route('/match_confirm', methods= ['GET', 'POST'])
+#@login_required
+#def confirm_match():
+    #form=MatchForm()
+    #if form.validate_on_submit():
+        #game = Game.query.filter_by(match=) #problem, hur identifierar man matcherna
+        #game.available = Game(form.available.data)
+        #db.session.commit()
+
+
+
+        

@@ -27,3 +27,18 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+class Game(db.Model):
+    id=db.Column(db.Integer, primary_key=True)
+    player1= db.Column(db.String(64))
+    player2= db.Column(db.String(64))
+    bets=db.Column(db.String(180))
+    odds=db.Column(db.String(50),index=True)
+    available=db.Column(db.Boolean, default=False)
+    #ev lägg till timestamp
+
+    def __repr__(self):
+        return '<Game {}>'.format(self.body)
+    
+
+

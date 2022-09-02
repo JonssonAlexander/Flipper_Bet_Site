@@ -14,15 +14,16 @@
   {% if current_user.is_anonymous %}
   <li><a href="{{ url_for('login') }}" class="button-27">Login</a></li>
   <li><a href="{{ url_for('register') }}" class= "button-27">Click to Register!</a></li>
+  <li><a href="{{ url_for('match') }}" class= "button-27">Click to Create New Match!</a></li>
   {% else %}
-  <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+  <li><a href="{{ url_for('match') }}" class= "button-27">Click to Create New Match!</a></li>
   <li><a href="{{ url_for('logout') }}" class= "button-27">Logout</a></li>
   {% endif %}
 </body>
   <h1 style="color: white; font-size: 100; text-align: center;">Matcher</h1>
   <form method="post">
-
-    {% include 'table.html' %}
+    
+    {% include 'matchsite.html' %}
 
 
   <button type="submit" class="button-27">Submit</button>

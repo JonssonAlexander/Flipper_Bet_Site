@@ -28,3 +28,11 @@ class RegistrationForm(FlaskForm):
         user=User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('This email is already taken. Please use another email.')
+
+class MatchForm(FlaskForm):
+    player1=StringField('Spelare 1', validators=[DataRequired()]) 
+    player2=StringField('Spelare 2', validators=[DataRequired()])
+    odds=StringField('Bets', validators=[DataRequired()])
+    bets=StringField('Odds "x:y"', validators=[DataRequired()])
+    available=BooleanField('Tillgänglig')
+    submit=SubmitField('Lägg till')
